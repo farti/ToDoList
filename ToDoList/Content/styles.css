@@ -1,0 +1,23 @@
+﻿body {
+    background-color: #3498db;
+    font-family: Arial;
+    color: white;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    max-width: 300px;
+    margin: 20px auto;
+}
+
+li {
+    text-align: left;
+    background-color: white;
+    color: #444;
+}
+
+    li button {
+        float: right;
+        margin: 0px 3px;
+    }
