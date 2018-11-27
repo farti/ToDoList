@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList", "ToDoList\ToDoList.csproj", "{8599118E-802D-4F7F-8230-9B2AD795C834}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListApp", "ToDoList\ToDoListApp.csproj", "{8599118E-802D-4F7F-8230-9B2AD795C834}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
