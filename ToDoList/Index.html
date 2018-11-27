@@ -1,37 +1,36 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="pl-PL">
 <head>
     <meta charset="utf-8" />
     <title>To Do List</title>
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <link href="Content/styles.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <script src="Scripts/app.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
 </head>
 <body>
     <div class="container">
-        <h1>To Do List</h1>
-        <div class="row justify-content-center">
-            <form class="form-inline">
-                <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" class="form-control" placeholder="New List" />
-                </div>
-                <button type="submit" class="btn btn-primary mb-2">Create</button>
-            </form>
-        </div>
-        <div>
-            <h1>New List</h1>
+        <div id="createListDiv">
+            <h1>To Do List</h1>
             <div class="row justify-content-center">
-                <form class="form-inline">
-                    <div class="form-group mx-sm-3 mb-2">
-                        <input type="text" class="form-control" placeholder="New Item" />
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2">Add</button>
-                </form>
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" id="newListName" class="form-control" placeholder="New List" />
+                </div>
+                <button onclick="createNewList()" class="btn btn-primary mb-2">Create</button>
             </div>
-
-            <ul class="list-group">
-                <li class="list-group-item">Salad<button class="btn btn-danger btn-sm">D</button><button class="btn btn-warning btn-sm">C</button></li>
-                <li class="list-group-item">Milk<button class="btn btn-danger btn-sm">D</button><button class="btn btn-warning btn-sm">C</button></li>
-                <li class="list-group-item">Tomato<button class="btn btn-danger btn-sm">D</button><button class="btn btn-warning btn-sm">C</button></li>
+        </div>
+        <div id="toDoListDiv" style="display: none;">
+            <h1 id="toDoListTitle">New List</h1>
+            <div class="row justify-content-center">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" id="newItemName" class="form-control" placeholder="New Item" />
+                </div>
+                <button onclick="addItem()" type="submit" class="btn btn-primary mb-2">Add</button>
+            </div>
+            <ul id="toDoListItems" class="list-group">
             </ul>
         </div>
     </div>

@@ -5,6 +5,9 @@
     text-align: center;
 }
 
+.container {
+    margin-top: 100px; 
+}
 ul {
     list-style-type: none;
     max-width: 300px;
@@ -21,3 +24,7 @@ li {
         float: right;
         margin: 0px 3px;
     }
+
+.chcecked {
+    text-decoration: line-through;
+}
