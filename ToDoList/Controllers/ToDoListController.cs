@@ -1,18 +1,23 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using ToDoList = ToDoListApp.Models.ToDoList;
 
 namespace ToDoListApp.Controllers
 {
     public class ToDoListController : ApiController
     {
-        List<ToDoList> toDoLists = new List<ToDoList>()
+        public static List<ToDoList> toDoLists = new List<ToDoList>()
         {
-            new ToDoList() { Id = 0 , Name = "Groceries"},
+            new ToDoList() { Id = 0 , Name = "Groceries", Items =
+            {
+                    new  Item {Id = 0, Name = "Milk", ToDoListId = 0},
+                    new  Item {Id = 1, Name = "Water", ToDoListId = 0},
+                    new  Item {Id = 2, Name = "Tomato", ToDoListId = 0}
+            }},
             new ToDoList() { Id = 1 , Name = "Hardware"}
         };
 
@@ -29,8 +34,12 @@ namespace ToDoListApp.Controllers
         }
 
         // POST: api/ToDoList
-        public void Post([FromBody]string value)
+        public IEnumerable Post([FromBody]ToDoList newList)
         {
+            newList.Id = toDoLists.Count;
+            toDoLists.Add(newList);
+
+            return toDoLists;
         }
     }
 }

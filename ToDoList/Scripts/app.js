@@ -3,9 +3,17 @@
 function createNewList() {
     currentList.name = $("#newListName").val();
     currentList.items = new Array();
-    // Web Service Call
 
-    showToDoList();
+    // Web Service Call
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "api/ToDoList/",
+        data: currentList,
+        success: function (result) {
+            showToDoList();
+        }
+    });
 }
 
 function showToDoList() {
@@ -26,11 +34,19 @@ function showToDoList() {
 function addItem() {
     var newItem = {};
     newItem.name = $("#newItemName").val();
-    currentList.items.push(newItem);
+    newItem.toDoListId = currentList.id;
 
-    drawItems();
-
-    $("#newItemName").val("");
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "api/Item/",
+        data: newItem,
+        success: function (result) {
+            currentList = result;
+            drawItems();
+            $("#newItemName").val("");
+        }
+    });
 }
 
 function drawItems() {
@@ -40,38 +56,63 @@ function drawItems() {
         var currentItem = currentList.items[i];
         var $li = $('<li class="list-group-item ">').html(currentItem.name)
             .attr("id", "item_" + i);
-        var $deleteBtn = $("<button onclick='deleteItem(" + i + ")' class='btn btn-danger btn-sm'>D</button>").appendTo($li);
-        var $checkBtn = $("<button  onclick='checkItem(" + i + ")' class='btn btn-success btn-sm'>C</button>").appendTo($li);
+        var $deleteBtn = $("<button onclick='deleteItem(" + currentItem.id + ")' class='btn btn-danger btn-sm'>D</button>").appendTo($li);
+        var $checkBtn = $("<button  onclick='checkItem(" + currentItem.id + ")' class='btn btn-success btn-sm'>C</button>").appendTo($li);
+
+        if (currentItem.checked) {
+            $li.addClass("checked");
+        }
 
         $li.appendTo($list);
     }
 }
 
-function deleteItem(index) {
-    currentList.items.splice(index, 1);
-    drawItems();
+function deleteItem(itemId) {
+    $.ajax({
+        type: "DELETE",
+        dataType: "json",
+        url: "api/Item/" + itemId,
+        success: function (result) {
+            currentList = result;
+            drawItems();
+        }
+    });
 }
 
-function checkItem(index) {
-    if ($("#item_" + index).hasClass("chcecked")) {
-        $("#item_" + index).removeClass("chcecked");
-    } else {
-        $("#item_" + index).addClass("chcecked");
+function checkItem(itemId) {
+    var changedItem = {};
+
+    for (var i = 0; i < currentList.items.length; i++) {
+        if (currentList.items[i].id == itemId) {
+            changedItem = currentList.items[i];
+        }
     }
+
+    changedItem.checked = !changedItem.checked;
+
+    $.ajax({
+        type: "PUT",
+        dataType: "json",
+        url: "api/Item/" + itemId,
+        data: changedItem,
+        success: function (result) {
+            currentList = result;
+            drawItems();
+        }
+    });
 }
 
 function getToDoListById(id) {
-    console.info(id);
-
-    currentList.name = "Mock To Do List";
-    currentList.items = [
-        { name: "Milk" },
-        { name: "Tomato" },
-        { name: "Water" }
-    ];
-
-    showToDoList();
-    drawItems();
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "api/ToDoList/" + id,
+        success: function (result) {
+            currentList = result;
+            showToDoList();
+            drawItems();
+        }
+    });
 }
 
 $(document).ready(function () {
