@@ -54,8 +54,7 @@ function drawItems() {
 
     for (var i = 0; i < currentList.items.length; i++) {
         var currentItem = currentList.items[i];
-        var $li = $('<li class="list-group-item ">').html(currentItem.name)
-            .attr("id", "item_" + i);
+        var $li = $('<li class="list-group-item ">').html(currentItem.name).attr("id", "item_" + i);
         var $deleteBtn = $("<button onclick='deleteItem(" + currentItem.id + ")' class='btn btn-danger btn-sm'>D</button>").appendTo($li);
         var $checkBtn = $("<button  onclick='checkItem(" + currentItem.id + ")' class='btn btn-success btn-sm'>C</button>").appendTo($li);
 

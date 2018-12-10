@@ -37,6 +37,7 @@ namespace ToDoListApp.Controllers
         public IEnumerable Post([FromBody]ToDoList newList)
         {
             newList.Id = toDoLists.Count;
+            
             toDoLists.Add(newList);
 
             return toDoLists;
